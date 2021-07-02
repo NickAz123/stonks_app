@@ -13,8 +13,7 @@ export default function App() {
       console.log(response.data.message) // Just the message
     }) 
   }
-
-
+  
   return (
     <div className="App">
       <h1>Hi There!</h1>
