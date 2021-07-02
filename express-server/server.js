@@ -16,10 +16,35 @@ const db = new Pool(dbParams);
 console.log(dbParams)
 db.connect();
 
+//Query Functions
+const getUser = function() {
+  return db
+  .query(
+    `SELECT * FROM users`
+  )
+  .then((result) => {
+    return result.rows
+  })
+  .catch((err) => {
+   return err.message;
+  })
+}
+
 // Sample GET route
-App.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
+App.get('/api/data', (req, res) => {
+  // const user = getUser()
+  // res.json({user})
+  db.query(`SELECT * FROM users;`)
+  .then(data => {
+    const users = data.rows;
+    res.json({ users });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({error: err.message});
+  });
+});
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
