@@ -13,14 +13,10 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8",
-<<<<<<< HEAD
-    "webpack": "^4.0.0"
-=======
-    "socket.io": "^4.1.2",
+    "webpack": "^4.0.0",
     "socket.io-client": "^4.1.2",
     "websocket": "^1.0.34",
     "ws": "^5.2.3"
->>>>>>> nick/API-fetch2
   },
   "scripts": {
     "start": "react-scripts start",
