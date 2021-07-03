@@ -3,6 +3,7 @@ const App = Express();
 const BodyParser = require('body-parser');
 const PORT = 8080;
 require('dotenv').config();
+const fs = require('fs')
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -31,9 +32,7 @@ const getUser = function() {
 }
 
 // Sample GET route
-App.get('/api/data', (req, res) => {
-  // const user = getUser()
-  // res.json({user})
+App.get('/api/users', (req, res) => {
   db.query(`SELECT * FROM users;`)
   .then(data => {
     const users = data.rows;
@@ -45,6 +44,12 @@ App.get('/api/data', (req, res) => {
       .json({error: err.message});
   });
 });
+
+App.get('/api/all-stocks', (req, res) => {
+  let allstocks = fs.readFileSync('nyse_full_tickers.json');
+  let stocks = JSON.parse(allstocks);
+  res.json({stocks});
+})
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console

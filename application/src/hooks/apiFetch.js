@@ -2,27 +2,29 @@ import { useState, useEffect } from "react";
 const axios = require("axios");
 
 export default function apiFetch() {
-
   //Creating State
-  const[state, setState] = useState({
-    symbols:[],
-    stocks:[]
+  const [state, setState] = useState({
+    users: [],
+    stocks: []
   });
 
-  //Initial Axios Call to API
+  //Initial Axios Call to API// All Tokens are hard coded for now
   useEffect(() => {
-
-    // const webSocket = new Websocket
-
     Promise.all([
-      axios.default.get(`https://finnhub.io/api/v1/stock/symbol?exchange=AS&token=c3fm17qad3if6rt4mr10`)
+      axios.default.get(
+        `https://finnhub.io/api/v1/stock/symbol?exchange=AS&token=c3fm17qad3if6rt4mr10`
+      ),
+      axios.default.get(
+        `/api/users`
+      ),
     ]).then((all) => {
       setState((prev) => ({
         ...prev,
-        symbols: all[0].data
+        stocks: all[0].data,
+        users: all[1].data,
       }));
     });
-  }, [])
+  }, []);
 
-  return {state, setState}
+  return { state, setState };
 }
