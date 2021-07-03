@@ -31,9 +31,9 @@ const getUser = function() {
   })
 }
 
-// Sample GET route
+// Get Route for current logged in user
 App.get('/api/users', (req, res) => {
-  db.query(`SELECT * FROM users;`)
+  db.query(`SELECT * FROM users WHERE id=1;`)
   .then(data => {
     const users = data.rows;
     res.json({ users });
@@ -45,6 +45,21 @@ App.get('/api/users', (req, res) => {
   });
 });
 
+//Get route for transactions for logged in user
+App.get('/api/transactions', (req, res) => {
+  db.query(`SELECT * FROM transactions WHERE user_id=1;`)
+  .then(data => {
+    const users = data.rows;
+    res.json({ users });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({error: err.message});
+  });
+});
+
+//Get route for entire stock list
 App.get('/api/all-stocks', (req, res) => {
   let allstocks = fs.readFileSync('nyse_full_tickers.json');
   let stocks = JSON.parse(allstocks);

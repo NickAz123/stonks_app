@@ -17,11 +17,15 @@ export default function apiFetch() {
       axios.default.get(
         `/api/users`
       ),
+      axios.default.get(
+        '/api/transactions'
+      )
     ]).then((all) => {
       setState((prev) => ({
         ...prev,
         stocks: all[0].data,
         users: all[1].data,
+        transactions: all[2].data
       }));
     });
   }, []);
