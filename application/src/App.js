@@ -25,7 +25,7 @@ export default function App() {
       <StylesProvider injectFirst>
         <div className="App">
           <h1>Hi There!</h1>
-            <Button className="red-button"variant={"contained"} onClick={fetchData} >
+            <Button variant={"contained"} onClick={fetchData} >
               Fetch Data
             </Button>        
         </div>
